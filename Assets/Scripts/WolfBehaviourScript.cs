@@ -8,11 +8,18 @@ public class WolfBehaviourScript : MonoBehaviour {
 	bool mirandoDerecha = true;
 	Rigidbody2D rigi;
 	Animator anim;
+	bool atacando;
 
 	// Use this for initialization
 	void Start () {
 		rigi = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
+	}
+
+	void Update () {
+		if (Input.GetKeyDown(KeyCode.J)) {
+			atacando = true;
+		}
 	}
 	
 	// Update is called once per frame
@@ -29,6 +36,7 @@ public class WolfBehaviourScript : MonoBehaviour {
 			Girar ();
 		}
 
+		Atacar ();
 	}
 
 	void Girar () {
@@ -36,5 +44,12 @@ public class WolfBehaviourScript : MonoBehaviour {
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+	}
+
+	void Atacar () {
+		if (atacando) {
+			anim.SetTrigger ("atacar");
+			atacando = false;
+		}
 	}
 }
