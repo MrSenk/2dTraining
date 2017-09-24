@@ -9,11 +9,17 @@ public class WolfBehaviourScript : MonoBehaviour {
 	Rigidbody2D rigi;
 	Animator anim;
 	bool atacando;
+	Transform transform;
+	SpriteRenderer sprite;
+	public bool enemyInTrigger = false;
+	public GameObject target;
 
 	// Use this for initialization
 	void Start () {
 		rigi = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
+		transform = GetComponent<Transform> ();
+		sprite = GetComponent<SpriteRenderer> ();
 	}
 
 	void Update () {
@@ -29,6 +35,8 @@ public class WolfBehaviourScript : MonoBehaviour {
 
 		anim.SetFloat ("velocidad", Mathf.Abs (moveX+moveY));
 
+		sprite.sortingOrder = (Mathf.FloorToInt (transform.position.y * -5));
+
 		rigi.velocity = new Vector2 (moveX * velocidadMax, (moveY * velocidadMax)/2);
 		if (moveX > 0 && !mirandoDerecha) {
 			Girar ();
@@ -37,6 +45,8 @@ public class WolfBehaviourScript : MonoBehaviour {
 		}
 
 		Atacar ();
+
+
 	}
 
 	void Girar () {
@@ -49,6 +59,10 @@ public class WolfBehaviourScript : MonoBehaviour {
 	void Atacar () {
 		if (atacando) {
 			anim.SetTrigger ("atacar");
+
+			if (enemyInTrigger && atacando) {
+				target.SetActive (false);
+			}
 			atacando = false;
 		}
 	}

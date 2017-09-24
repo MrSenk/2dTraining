@@ -46,6 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ManoplaScript.cs" />
+     <Compile Include="Assets\Scripts\PotatoBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\WolfBehaviourScript.cs" />
      <Compile Include="Assets\ZSmartTile\Classes\ZST_MapManager.cs" />
      <Compile Include="Assets\ZSmartTile\Components\ZST_SmartTile.cs" />
